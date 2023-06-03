@@ -10,9 +10,19 @@ class ProductPage(BasePage):
     def check_added_book_name(self):
         book_name = self.browser.find_element(*ProductPageLocators.BOOK_NAME).text
         added_book_name = self.browser.find_element(*ProductPageLocators.ADDED_BOOK_NAME).text
-        assert book_name == added_book_name, f"Name of Book | Expected {book_name} is equal {added_book_name}"
+        assert book_name == added_book_name, \
+            f"Name of Book | Expected {book_name} is equal {added_book_name}"
     
     def check_added_cart_price(self):
         book_price = self.browser.find_element(*ProductPageLocators.BOOK_PRICE).text
         added_cart_price = self.browser.find_element(*ProductPageLocators.ADDED_CART_PRICE).text
-        assert book_price == added_cart_price, f"Price of book | Expected {book_price} is equal {added_cart_price}"
+        assert book_price == added_cart_price, \
+            f"Price of book | Expected {book_price} is equal {added_cart_price}"
+            
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message is presented, but should not be"
+            
+    def should_disappear_success_message(self):
+        assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message isn't disappear, but should be"
